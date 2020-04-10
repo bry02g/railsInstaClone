@@ -26,8 +26,7 @@ RSpec.describe "Posts", type: :request do
         expect{
             post user_posts_url(@user), params: { post: { caption: @post.caption, image_url: @post.image_url } }
         }.to change(Post,:count).by 1
-        puts("USER: #{@user.id}")
-        puts("POST: #{Post.last.id}")
+
         assert_redirected_to user_posts_url(@user)
       end
 
