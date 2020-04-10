@@ -45,12 +45,12 @@
     <main role="main" class="container">
         <% unless notice.nil? %>
           <div class="alert alert-success">
-            <a href="#" class="alert-link"><%= notice %></a>
+            <%= notice %>
           </div>
         <% end %>
         <% unless alert.nil? %>
           <div class="alert alert-danger">
-            <a href="#" class="alert-link"><%= notice %></a>
+            <%= alert %>
           </div>
         <% end %>
         <%= yield %>
