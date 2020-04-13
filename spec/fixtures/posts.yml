@@ -2,12 +2,12 @@
 
 one:
   id: 1
-  caption: MyText
-  image_url: MyText
+  caption: cool dog pic
+  image_url: http://www.google.com/dog.jpeg
   user_id: 1
 
 two:
   id: 2
-  caption: MyText
-  image_url: MyText
+  caption: cool cat pic
+  image_url: http://www.google.com/cat.jpeg
   user_id: 1
