@@ -59,3 +59,13 @@ step "I should see her posts" do
         expect(page.body).to include(p.image_url)
     end
 end
+
+step "fill out the form and submit" do
+    fill_in "post_caption", with: "Cool post"
+    fill_in "post_image_url", with: "http://www.google.com/cool.jpg"
+    click_on "Create Post"
+end
+
+step "I should have created a post" do
+    expect(page.body).to include("Post was successfully created.")
+end
