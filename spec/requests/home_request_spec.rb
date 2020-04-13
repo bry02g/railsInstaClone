@@ -1,10 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "Home", type: :request do
-    fixtures :users
-    
+RSpec.describe "Home", type: :request do    
       before do
-        @user = users(:tom)
+        @user = create(:user)
       end
     
      describe "When signed in" do

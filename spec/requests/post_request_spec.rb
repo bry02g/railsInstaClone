@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Posts", type: :request do
-    fixtures :users, :posts
       before do
-        @user = users(:tom)
-        @post = posts(:one)
+        @user = create(:user_with_posts)
+        @post = @user.posts.first
       end
     
      describe "When signed in" do
@@ -24,7 +23,7 @@ RSpec.describe "Posts", type: :request do
 
       it "should create post" do
         expect{
-            post user_posts_url(@user), params: { post: { caption: @post.caption, image_url: @post.image_url } }
+            post user_posts_url(@user), params: { post: { caption: "cool post", image_url: "http://aol.com/dog.jpg" } }
         }.to change(Post,:count).by 1
 
         expect(response).to redirect_to(user_posts_url(@user))
@@ -41,7 +40,7 @@ RSpec.describe "Posts", type: :request do
       end
 
       it "should update post" do
-        patch user_post_url(@user, @post), params: { post: { caption: @post.caption, image_url: @post.image_url, } }
+        patch user_post_url(@user, @post), params: { post: { caption: "edited", image_url: "http://aol.com/cat.jpg", } }
         expect(response).to redirect_to(user_posts_url(@user))
       end
 
@@ -66,7 +65,7 @@ RSpec.describe "Posts", type: :request do
       end
 
       it "should not create post" do
-        post user_posts_url(@user), params: { post: { caption: @post.caption, image_url: @post.image_url } }
+        post user_posts_url(@user), params: { post: { caption: "cool post", image_url: "http://aol.com/dog.jpg" } }
         expect(response).to redirect_to(new_user_session_path)
       end
 
@@ -81,7 +80,7 @@ RSpec.describe "Posts", type: :request do
       end
 
       it "should not update post" do
-        patch user_post_url(@user, @post), params: { post: { caption: @post.caption, image_url: @post.image_url } }
+        patch user_post_url(@user, @post), params: { post: { caption: "edited", image_url: "http://aol.com/cat.jpg" } }
         expect(response).to redirect_to(new_user_session_path)
       end
 
