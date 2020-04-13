@@ -81,7 +81,7 @@ step "fill out the form and submit" do
 end
 
 step "I should have created a post" do
-    expect(page.body).to include("Post was successfully created.")
+    expect(page).to have_content("Post was successfully created.")
 end
 
 step "I am viewing one of my posts" do
@@ -97,8 +97,8 @@ step "I submit the form" do
 end
 
 step "the post's caption should have changed" do
-    expect(page.body).to include("Post was successfully updated.")
-    expect(page.body).to include("New Caption")
+    expect(page).to have_content("Post was successfully updated.")
+    expect(page).to have_content("New Caption")
 end
 
 step "fill out the form with a new image url" do
@@ -106,16 +106,16 @@ step "fill out the form with a new image url" do
 end
 
 step "the post's image should have changed" do
-    expect(page.body).to include("Post was successfully updated.")
+    expect(page).to have_content("Post was successfully updated.")
     expect(page.body).to include("http://www.aol.com/new.jpg")
 end
 
 step 'I click "Destroy" and confirm' do
     accept_confirm do
-        click_link 'Destroy'
+        click_on 'Destroy'
     end
 end
 
 step "that post should be deleted" do
-    expect(page.body).to have_content("Post was successfully destroyed.")
+    expect(page).to have_content("Post was successfully destroyed.")
 end
