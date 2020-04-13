@@ -58,6 +58,9 @@ GEM
       zeitwerk (~> 2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    apparition (0.5.0)
+      capybara (~> 3.13, < 4)
+      websocket-driver (>= 0.6.5)
     autoprefixer-rails (9.7.6)
       execjs
     bcrypt (3.1.13)
@@ -271,6 +274,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  apparition
   bootsnap (>= 1.4.2)
   bootstrap (~> 4.4.1)
   byebug

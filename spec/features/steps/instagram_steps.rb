@@ -95,3 +95,13 @@ step "the post's image should have changed" do
     expect(page.body).to include("Post was successfully updated.")
     expect(page.body).to include("http://www.aol.com/new.jpg")
 end
+
+step 'I click "Destroy" and confirm' do
+    accept_confirm do
+        click_link 'Destroy'
+    end
+end
+
+step "that post should be deleted" do
+    expect(page.body).to include("Post was successfully destroyed.")
+end
