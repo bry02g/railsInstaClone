@@ -6,7 +6,7 @@ RSpec.describe "Posts", type: :request do
         @post = @user.posts.first
       end
     
-     describe "When signed in" do
+     context "When signed in" do
        before do
           sign_in @user
        end
@@ -16,17 +16,45 @@ RSpec.describe "Posts", type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it "should get new" do
-        get new_user_post_url(@user)
-        expect(response).to have_http_status(:ok)
+      describe "#create" do
+        it "should get new" do
+          get new_user_post_url(@user)
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "should create a valid post" do
+          expect{
+              post user_posts_url(@user), params: { post: { caption: "cool post", image_url: "http://aol.com/dog.jpg" } }
+          }.to change(Post,:count).by 1
+
+          expect(response).to redirect_to(user_posts_url(@user))
+        end
+
+        it "should not create an invalid post" do
+          expect{
+            post user_posts_url(@user), params: { post: { caption: "cool post", image_url: "http://aol.com" } }
+          }.not_to change(Post,:count)
+
+          expect(response).to have_http_status(:ok)
+        end
       end
 
-      it "should create post" do
-        expect{
-            post user_posts_url(@user), params: { post: { caption: "cool post", image_url: "http://aol.com/dog.jpg" } }
-        }.to change(Post,:count).by 1
+      describe "#update" do
+        it "should get edit" do
+          get edit_user_post_url(@user,@post)
+          expect(response).to have_http_status(:ok)
+        end
 
-        expect(response).to redirect_to(user_posts_url(@user))
+        it "should update post when valid" do
+          patch user_post_url(@user, @post), params: { post: { image_url: "http://aol.com/cat.jpg", } }
+          expect(response).to redirect_to(user_posts_url(@user))
+        end
+
+        it "should not update post when valid" do
+          patch user_post_url(@user, @post), params: { post: { image_url: "http://aol.com/cat", } }
+          expect(Post.find(@post.id).image_url).not_to eq("http://aol.com/cat")
+          expect(response).to have_http_status(:ok)
+        end
       end
 
       it "should show post" do
@@ -34,15 +62,7 @@ RSpec.describe "Posts", type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it "should get edit" do
-        get edit_user_post_url(@user,@post)
-        expect(response).to have_http_status(:ok)
-      end
 
-      it "should update post" do
-        patch user_post_url(@user, @post), params: { post: { caption: "edited", image_url: "http://aol.com/cat.jpg", } }
-        expect(response).to redirect_to(user_posts_url(@user))
-      end
 
       it "should destroy post" do
         expect{
@@ -53,7 +73,7 @@ RSpec.describe "Posts", type: :request do
       end
     end
 
-    describe "when not signed in" do
+    context "when not signed in" do
       it "should not get index" do
         get user_posts_url(@user)
         expect(response).to redirect_to(new_user_session_path)
