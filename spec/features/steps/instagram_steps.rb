@@ -21,6 +21,13 @@ step "I should see the everyone's posts" do
     end
 end
 
+step "everyone's posts should be in reverse order" do
+    @posts.reverse.each_with_index do |p,i|
+        image = find(".order-#{i}")
+        expect(image[:class]).to include("post-#{p.id}")
+    end
+end
+
 step "on the homepage" do
     visit root_path
 end
@@ -57,6 +64,13 @@ end
 step "I should see her posts" do
     @mary.posts.each do |p|
         expect(page.body).to include(p.image_url)
+    end
+end
+
+step "the posts should be in reverse order" do
+    @mary.posts.reverse.each_with_index do |p,i|
+        image = find(".order-#{i}")
+        expect(image[:class]).to include("post-#{p.id}")
     end
 end
 

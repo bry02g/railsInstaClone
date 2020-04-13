@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = @user.posts
+    @posts = @user.posts.reverse
   end
 
   # GET /posts/1

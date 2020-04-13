@@ -4,7 +4,7 @@ class HomeController < ApplicationController
             redirect_to new_user_session_path
         else
             @home = true
-            @posts = Post.all
+            @posts = Post.all.reverse
         end
     end
 end

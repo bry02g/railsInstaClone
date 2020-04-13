@@ -19,3 +19,4 @@ Feature: View Profiles
     When I view Mary's profile
     Then I should see her email address
     And I should see her posts
+    And the posts should be in reverse order

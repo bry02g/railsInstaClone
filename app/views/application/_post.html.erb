@@ -17,7 +17,7 @@
         </ul>
       </div>
       <div class="card-body">
-        <img src="<%= post.image_url %>" class="card-img-top" alt="...">
+        <img src="<%= post.image_url %>" class="card-img-top order-<%= defined?(post_counter) ? post_counter : "" %> post-<%= post.id %>" alt="...">
       </div>
       <div class="card-footer">
         <p class="card-text"><strong><%= post.user.email %></strong> <%= post.caption %></p>
