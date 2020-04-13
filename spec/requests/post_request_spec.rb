@@ -14,12 +14,12 @@ RSpec.describe "Posts", type: :request do
          
       it "should get index" do
         get user_posts_url(@user)
-        assert_response :success
+        expect(response).to have_http_status(:ok)
       end
 
       it "should get new" do
         get new_user_post_url(@user)
-        assert_response :success
+        expect(response).to have_http_status(:ok)
       end
 
       it "should create post" do
@@ -27,22 +27,22 @@ RSpec.describe "Posts", type: :request do
             post user_posts_url(@user), params: { post: { caption: @post.caption, image_url: @post.image_url } }
         }.to change(Post,:count).by 1
 
-        assert_redirected_to user_posts_url(@user)
+        expect(response).to redirect_to(user_posts_url(@user))
       end
 
       it "should show post" do
         get user_post_url(@user, @post)
-        assert_response :success
+        expect(response).to have_http_status(:ok)
       end
 
       it "should get edit" do
         get edit_user_post_url(@user,@post)
-        assert_response :success
+        expect(response).to have_http_status(:ok)
       end
 
       it "should update post" do
         patch user_post_url(@user, @post), params: { post: { caption: @post.caption, image_url: @post.image_url, } }
-        assert_redirected_to user_posts_url(@user)
+        expect(response).to redirect_to(user_posts_url(@user))
       end
 
       it "should destroy post" do
@@ -50,7 +50,7 @@ RSpec.describe "Posts", type: :request do
           delete user_post_url(@user, @post)
         }.to change(Post,:count).by -1
 
-        assert_redirected_to user_posts_url(@user)
+        expect(response).to redirect_to(user_posts_url(@user))
       end
     end
 
