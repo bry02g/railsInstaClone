@@ -103,5 +103,5 @@ step 'I click "Destroy" and confirm' do
 end
 
 step "that post should be deleted" do
-    expect(page.body).to include("Post was successfully destroyed.")
+    expect(page.body).to have_content("Post was successfully destroyed.")
 end
