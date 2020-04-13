@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :set_user
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :verify_ownership!, except: [:index, :show]
 
   # GET /posts
   # GET /posts.json
@@ -60,6 +61,12 @@ class PostsController < ApplicationController
     
     def set_post
       @post = @user.posts.find(params[:id])
+    end
+
+    def verify_ownership!
+      if current_user.id != @user.id
+        redirect_to root_path, alert: "You are not authorized to complete this action."
+      end
     end
 
     # Only allow a list of trusted parameters through.
