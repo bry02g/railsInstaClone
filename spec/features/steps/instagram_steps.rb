@@ -69,3 +69,29 @@ end
 step "I should have created a post" do
     expect(page.body).to include("Post was successfully created.")
 end
+
+step "I am viewing one of my posts" do
+    visit(user_post_path(@bob, @bob.posts.first))
+end
+
+step "fill out the form with a new caption" do
+    fill_in "post_caption", with: "New Caption"
+end
+
+step "I submit the form" do
+    click_on "Update Post"
+end
+
+step "the post's caption should have changed" do
+    expect(page.body).to include("Post was successfully updated.")
+    expect(page.body).to include("New Caption")
+end
+
+step "fill out the form with a new image url" do
+    fill_in "post_image_url", with: "http://www.aol.com/new.jpg"
+end
+
+step "the post's image should have changed" do
+    expect(page.body).to include("Post was successfully updated.")
+    expect(page.body).to include("http://www.aol.com/new.jpg")
+end

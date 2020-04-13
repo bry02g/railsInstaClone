@@ -1,10 +1,18 @@
 Feature: Editing Posts
   Scenario: signed in and editing a post's caption
-    Given that I am viewing one of my posts
-    When I click "Edit" and fill out the form with a new caption
-    Then I should be able to change the post's caption
+    Given there are two users with posts, Bob and Mary
+    And I sign in as Bob
+    And I am viewing one of my posts
+    When I click "Edit"
+    And fill out the form with a new caption
+    And I submit the form
+    Then the post's caption should have changed
 
   Scenario: signed in and editing a post's image
-    Given that I am viewing one of my posts
-    When I click "Edit" and fill out the form with a new Image Url
-    Then I should be able to change the post's Image Url
+    Given there are two users with posts, Bob and Mary
+    And I sign in as Bob
+    And I am viewing one of my posts
+    When I click "Edit"
+    And fill out the form with a new image url
+    And I submit the form
+    Then the post's image should have changed
