@@ -4,7 +4,7 @@
       <div class="card-header">
          <ul class="nav nav-pills card-header-pills">
            <li class="nav-item mr-auto">
-             <%= link_to post.user.email, user_posts_path(post.user), class: "nav-link" %>
+             <%= link_to post.user.email, user_posts_path(post.user), class: "nav-link", id: "post-email-#{post.id}"%>
            </li>
            <% if current_user == post.user %>
                 <li class="nav-item">
