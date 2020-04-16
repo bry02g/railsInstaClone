@@ -8,8 +8,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'devise'
 require 'capybara-screenshot/rspec'
-require 'capybara/apparition'
-Capybara.javascript_driver = :apparition
+
 Capybara.default_max_wait_time = 5
 # Add additional requires below this line. Rails is not loaded until this point!
 
